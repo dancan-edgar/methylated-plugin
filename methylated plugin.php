@@ -61,11 +61,6 @@ class MethylatedPlugin
         // Flush rewrite rules
         flush_rewrite_rules();
     }
-
-    function uninstall(){
-
-    }
-
     function custom_post_type(){
         register_post_type('book',['public' => true,'label' => 'Books']);
     }
