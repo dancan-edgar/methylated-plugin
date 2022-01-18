@@ -48,6 +48,10 @@ class MethylatedPlugin
     {
         add_action('init',array($this,'custom_post_type'));
     }
+    // Function to trigger the enqueuing of the scripts
+    function register(){
+        add_action('wp_enqueue_scripts',array($this,'enqueue'));
+    }
 
     // methods
     function activate(){
@@ -65,6 +69,13 @@ class MethylatedPlugin
         register_post_type('book',['public' => true,'label' => 'Books']);
     }
 
+    function enqueue(){
+        // Enqueue css and javascript scripts
+
+        wp_enqueue_style('mypluginstyle',plugins_url('/assets/mystyle.css',__FILE__));
+        wp_enqueue_script('mypluginscript',plugins_url('/assets/myscript.js',__FILE__));
+    }
+
 
 
 }
@@ -73,9 +84,10 @@ class MethylatedPlugin
 if (class_exists('MethylatedPlugin')){
 
     $methylatedPlugin = new MethylatedPlugin();
+    $methylatedPlugin->register();
 }
 
-// TRIGGERS ( Wordress Plugins )
+// TRIGGERS ( Wordpress Plugins )
 
 
 // Hooks
